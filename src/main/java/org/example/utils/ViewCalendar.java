@@ -1,9 +1,18 @@
-package org.example.handle;
+package org.example.utils;
+
+import org.example.bots.SimpleBot;
+import org.telegram.telegrambots.meta.api.methods.ParseMode;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class ViewCalendar {
@@ -94,5 +103,31 @@ public class ViewCalendar {
             }
         }
         return builder.toString();
+    }
+
+    public static void showCalendar(String chatId, SimpleBot bot) throws TelegramApiException {
+        ViewCalendar myCalendar = new ViewCalendar(null);
+        String calendar = myCalendar.getCalendar();
+        SendMessage message = new SendMessage(chatId, calendar);
+        message.setParseMode(ParseMode.MARKDOWN);
+
+        InlineKeyboardMarkup keyboardMarkup = myCalendar.getCalendarKeyboardMarkup();
+        message.setReplyMarkup(keyboardMarkup);
+
+        bot.execute(message);
+
+
+    }
+
+    public InlineKeyboardMarkup getCalendarKeyboardMarkup() {
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        button1.setText("⬅");
+        button1.setCallbackData("previousCalendar " + getCalendarDate());
+        InlineKeyboardButton button2 = new InlineKeyboardButton();
+        button2.setText("➡");
+        button2.setCallbackData("nextCalendar " + getCalendarDate());
+        List<InlineKeyboardButton> buttons = Arrays.asList(button1, button2);
+        List<List<InlineKeyboardButton>> buttonsList = List.of(buttons);
+        return new InlineKeyboardMarkup(buttonsList);
     }
 }
