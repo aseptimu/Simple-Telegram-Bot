@@ -18,8 +18,8 @@ public class SimpleBot extends TelegramLongPollingBot {
 
     public SimpleBot() {
         Properties properties = new Properties();
-        try (InputStream input = new FileInputStream("src\\main\\resources\\application.properties")) {
-            properties.load(input);
+        try  {
+            properties.load(ClassLoader.getSystemResourceAsStream("application.properties"));
             botToken = properties.getProperty("botToken");
             botUsername = properties.getProperty("botUsername");
         } catch (IOException e) {

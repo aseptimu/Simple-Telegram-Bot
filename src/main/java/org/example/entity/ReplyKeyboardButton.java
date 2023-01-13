@@ -40,19 +40,6 @@ public enum ReplyKeyboardButton implements ReplyKeyboardButtonAction {
             BotTime.processCalendar(chatId, bot);
         }
     },
-    SERVER_TIME("Время на сервере") {
-        @Override
-        public void sendAnswer(String chatId, SimpleBot bot) throws TelegramApiException {
-            BotTime.processServerTime(chatId, bot);
-        }
-    },
-    MY_TIME("Моё время") {
-        @Override
-        public void sendAnswer(String chatId, SimpleBot bot) throws TelegramApiException {
-            BotTime.processMyTime(chatId, bot);
-        }
-    },
-
     
     DICE("Кубик \uD83C\uDFB2") {
         @Override
