@@ -3,26 +3,18 @@ package org.example.handle;
 import org.example.bots.SimpleBot;
 import org.example.entity.ReplyKeyboardButton;
 import org.example.handle.reply.BotStartReply;
-import org.example.utils.ViewCalendar;
 import org.example.utils.MessageUtils;
+import org.example.utils.ViewCalendar;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
-import org.telegram.telegrambots.meta.api.methods.send.SendDice;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class UpdateController {
-    private SimpleBot bot;
+    private final SimpleBot bot;
     private String chatId;
 
     public UpdateController(SimpleBot bot) {
@@ -75,14 +67,9 @@ public class UpdateController {
                 "Неподдерживаемый тип сообщения!");
         bot.sendAnswerMessage(sendMessage);
     }
-    
-    private Message processDice() throws TelegramApiException {
-        SendDice dice = new SendDice(chatId);
-        return (bot.execute(dice));
-    }
 
-    private void workInProgress() throws TelegramApiException {
-        SendMessage message = new SendMessage(chatId, "Пока не реализовано");
-        bot.execute(message);
-    }
+//    private void workInProgress() throws TelegramApiException {
+//        SendMessage message = new SendMessage(chatId, "Пока не реализовано");
+//        bot.execute(message);
+//    }
 }

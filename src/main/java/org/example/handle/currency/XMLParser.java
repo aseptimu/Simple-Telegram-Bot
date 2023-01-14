@@ -15,26 +15,41 @@ import org.xml.sax.SAXException;
 public class XMLParser {
     
     private static Document document;
+    private static String date;
 
     public static Document execute(String resource) throws IOException, ParserConfigurationException, SAXException {
         document = loadXML(resource);
+        initDate();
         return document;
     }
 
-    public static String getCharCode(Document document, String charCodeValue) {
-        NodeList valutes = document.getElementsByTagName("Valute");
-        for (int i = 0; i < valutes.getLength(); i++) {
-            Element valute = (Element) valutes.item(i);
-            String charCode = valute.getElementsByTagName("CharCode").item(0).getTextContent();
-            if(charCode.equals(charCodeValue)) {
-                return "" + charCode + ": " 
-                        + valute.getElementsByTagName("Value").item(0).getTextContent()
-                        + " RUB";
+    public static String getDate() {
+        return date;
+    }
+
+    public static String getCharCode(Document document, Currency charCodeValue) {
+        NodeList currencies = document.getElementsByTagName("Valute");
+        for (int i = 0; i < currencies.getLength(); i++) {
+            Element currency = (Element) currencies.item(i);
+            String charCode = currency.getElementsByTagName("CharCode").item(0).getTextContent();
+            if(charCode.equals(charCodeValue.toString())) {
+                return charCodeWrapper(charCodeValue, 
+                        currency.getElementsByTagName("Value").item(0).getTextContent());
             }
         }
         return null;
     }
+    
+    private static String charCodeWrapper(Currency currency, String value) {
 
+        return currency + currency.getSign() + ": " + value.substring(0, value.length() - 2) + " RUB\n";
+    }
+
+    private static void initDate() {
+        Element valCurs = document.getDocumentElement();
+        date = valCurs.getAttribute("Date");
+    }
+    
     public static Document loadXML(String urlString) throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
