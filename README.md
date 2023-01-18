@@ -9,7 +9,7 @@ This bot is designed to help users with a variety of tasks, including checking t
 - Check exchange rates
 - Get the current weather in Moscow
 
-![]([gif url](https://media.giphy.com/media/X94NH9IzOiipsf32yi/giphy.gif))
+![](https://media.giphy.com/media/X94NH9IzOiipsf32yi/giphy.gif)
 
 ## Getting Started
 
