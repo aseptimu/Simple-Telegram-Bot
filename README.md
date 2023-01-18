@@ -1,6 +1,6 @@
 # Simple Telegram Bot
 
-This bot is designed to help users with a variety of tasks, including checking the date and calendar on the server, playing games with random values, checking exchange rates, and getting the current weather in Moscow.
+This bot is designed to assist users with a plethora of functionalities, from checking the date and calendar on the server 📅 to playing games with random values 🎲, monitoring exchange rates 💱 and providing current weather updates in Moscow ☁️.
 
 ## Features
 
